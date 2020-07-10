@@ -212,13 +212,6 @@ final class VideoPlayer {
       exoPlayer.setAudioStreamType(C.STREAM_TYPE_MUSIC);
     }
   }
-  void setSpeed(double value) {
-    float bracketedValue = (float) value;
-    PlaybackParameters existingParam = exoPlayer.getPlaybackParameters();
-    PlaybackParameters newParameter =
-        new PlaybackParameters(bracketedValue, existingParam.pitch, existingParam.skipSilence);
-    exoPlayer.setPlaybackParameters(newParameter);
-  }
   void play() {
     exoPlayer.setPlayWhenReady(true);
   }
@@ -234,6 +227,10 @@ final class VideoPlayer {
   void setVolume(double value) {
     float bracketedValue = (float) Math.max(0.0, Math.min(1.0, value));
     exoPlayer.setVolume(bracketedValue);
+  }
+  void setSpeed(double value) {
+    float bracketedValue = (float) Math.max(0.0, Math.min(1.0, value));
+    exoPlayer.setSpeed(bracketedValue);
   }
 
   void seekTo(int location) {

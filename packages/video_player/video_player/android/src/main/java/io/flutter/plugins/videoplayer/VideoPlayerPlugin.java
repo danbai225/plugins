@@ -146,6 +146,10 @@ public class VideoPlayerPlugin implements FlutterPlugin, VideoPlayerApi {
     VideoPlayer player = videoPlayers.get(arg.getTextureId());
     player.setVolume(arg.getVolume());
   }
+  public void setSpeed(VolumeMessage arg) {
+    VideoPlayer player = videoPlayers.get(arg.getTextureId());
+    player.setSpeed(arg.getVolume());
+  }
 
   public void play(TextureMessage arg) {
     VideoPlayer player = videoPlayers.get(arg.getTextureId());
