@@ -229,8 +229,11 @@ final class VideoPlayer {
     exoPlayer.setVolume(bracketedValue);
   }
   void setSpeed(double value) {
-    float bracketedValue = (float) Math.max(0.0, Math.min(1.0, value));
-    exoPlayer.setSpeed(bracketedValue);
+    float bracketedValue = (float) value;
+    PlaybackParameters existingParam = exoPlayer.getPlaybackParameters();
+    PlaybackParameters newParameter =
+            new PlaybackParameters(bracketedValue, existingParam.pitch, existingParam.skipSilence);
+    exoPlayer.setPlaybackParameters(newParameter);
   }
 
   void seekTo(int location) {
