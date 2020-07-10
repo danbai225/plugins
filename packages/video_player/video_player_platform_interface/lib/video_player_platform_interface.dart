@@ -94,6 +94,10 @@ abstract class VideoPlayerPlatform {
   Future<void> setVolume(int textureId, double volume) {
     throw UnimplementedError('setVolume() has not been implemented.');
   }
+  /// Sets the volume to a range between 0.0 and 1.0.
+  Future<void> setSpeed(int textureId, double speed) {
+    throw UnimplementedError('setSpeed() has not been implemented.');
+  }
 
   /// Sets the video position to a [Duration] from the start.
   Future<void> seekTo(int textureId, Duration position) {
