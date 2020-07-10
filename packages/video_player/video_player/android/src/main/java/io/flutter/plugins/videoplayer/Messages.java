@@ -234,7 +234,7 @@ public class Messages {
     void setLooping(LoopingMessage arg);
 
     void setVolume(VolumeMessage arg);
-
+    void setSpeed(VolumeMessage arg);
     void play(TextureMessage arg);
 
     PositionMessage position(TextureMessage arg);
@@ -373,6 +373,31 @@ public class Messages {
         BasicMessageChannel<Object> channel =
             new BasicMessageChannel<Object>(
                 binaryMessenger,
+                "dev.flutter.pigeon.VideoPlayerApi.setSpeed",
+                new StandardMessageCodec());
+        if (api != null) {
+          channel.setMessageHandler(
+              new BasicMessageChannel.MessageHandler<Object>() {
+                public void onMessage(Object message, BasicMessageChannel.Reply<Object> reply) {
+                  VolumeMessage input = VolumeMessage.fromMap((HashMap) message);
+                  HashMap<String, HashMap> wrapped = new HashMap<String, HashMap>();
+                  try {
+                    api.setSpeed(input);
+                    wrapped.put("result", null);
+                  } catch (Exception exception) {
+                    wrapped.put("error", wrapError(exception));
+                  }
+                  reply.reply(wrapped);
+                }
+              });
+        } else {
+          channel.setMessageHandler(null);
+        }
+      }
+      {
+        BasicMessageChannel<Object> channel =
+            new BasicMessageChannel<Object>(
+                binaryMessenger,
                 "dev.flutter.pigeon.VideoPlayerApi.play",
                 new StandardMessageCodec());
         if (api != null) {
@@ -469,6 +494,7 @@ public class Messages {
           channel.setMessageHandler(null);
         }
       }
+      
     }
   }
 
