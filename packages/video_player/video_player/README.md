@@ -1,4 +1,4 @@
-# Video Player plugin for Flutter
+# Video Player plugin for Flutter  支持倍速播放 仅Android
 
 [![pub package](https://img.shields.io/pub/v/video_player.svg)](https://pub.dartlang.org/packages/video_player)
 
